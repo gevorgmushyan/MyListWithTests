@@ -316,16 +316,16 @@ public class MyList<E> implements List<E> {
     public boolean removeAll(E e) {
         if (size() == 0)
             return false;
-        boolean res = false;
+        boolean result = false;
         for (int i = 0; i < size(); i++) {
             if (Objects.equals(e, array[i])) {
                 remove(i);
                 i--;
-                res = true;
+                result = true;
             }
         }
         minimizeArray();
-        return res;
+        return result;
     }
 
     // Bulk Modification Operations
@@ -445,7 +445,7 @@ public class MyList<E> implements List<E> {
      * return the added result list
      * @throws NullPointerException if the specified collection is null
      */
-    public MyList<E> addList(int index, MyList list) {
+    private MyList<E> addList(int index, MyList list) {
         if (list == null)
             throw new NullPointerException();
         if(index < 0 || index > size())
@@ -709,7 +709,7 @@ public class MyList<E> implements List<E> {
     class MyListItr<F> implements ListIterator<F> {
         private int index = 0;
         private boolean allowRemoveOrSet = false;
-        private int lastReturndIndex = -1;
+        private int lastReturnedIndex = -1;
 
         public MyListItr() {
         }
@@ -746,7 +746,7 @@ public class MyList<E> implements List<E> {
             if (index >= size())
                 throw new NoSuchElementException();
             allowRemoveOrSet = true;
-            lastReturndIndex = index;
+            lastReturnedIndex = index;
             return (F) array[index++];
         }
 
@@ -783,7 +783,7 @@ public class MyList<E> implements List<E> {
             if (size == 0 || index <= 0)
                 throw new NoSuchElementException();
             allowRemoveOrSet = true;
-            lastReturndIndex = index;
+            lastReturnedIndex = index;
             return (F) array[index--];
         }
 
@@ -857,7 +857,7 @@ public class MyList<E> implements List<E> {
         public void set(F e) {
             if (!allowRemoveOrSet)
                 throw new IllegalStateException();
-            MyList.this.set(lastReturndIndex, (E) e);
+            MyList.this.set(lastReturnedIndex, (E) e);
         }
 
         /**
@@ -884,8 +884,8 @@ public class MyList<E> implements List<E> {
                 MyList.this.add((E) e);
                 index = 0;
             } else {
-                MyList.this.add(lastReturndIndex, (E) e);
-                lastReturndIndex++;
+                MyList.this.add(lastReturnedIndex, (E) e);
+                lastReturnedIndex++;
                 index++;
             }
         }

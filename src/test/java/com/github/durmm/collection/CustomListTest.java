@@ -263,6 +263,19 @@ class CustomListTest {
 
             assertThat(list.size()).isEqualTo(1);
         }
+
+        @Test
+        void removeByIndexShouldDecreaseSize() {
+            List<String> list = create();
+
+            list.add("a");
+            list.add("b");
+
+            list.remove(0);
+            list.remove(0);
+
+            assertThat(list.size()).isEqualTo(1);
+        }
     }
 
     @Nested
